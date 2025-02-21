@@ -1,6 +1,8 @@
 {
   "dependencies": {
-    "semistandard": "^17.0.0",
-    "typescript": "^5.7.3"
+    "semistandard": "^17.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.5"
   }
 }
