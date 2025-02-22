@@ -18,7 +18,7 @@ class Player {
     this.game = game;
   }
 
-  // TODO; addd pick function
+  // TODO: add pick function
 }
 
 module.exports = { Player };

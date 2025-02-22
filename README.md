@@ -1,4 +1,4 @@
-# Blitz Whot
+# Blitz Whot :zap:
 ## Introduction
 The goal of this project is to create a variation of the whot card game with some concepts in mind.
 * The well known use of action cards
