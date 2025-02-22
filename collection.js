@@ -28,6 +28,7 @@ class Collection {
    * @returns {Card} Removed card
    */
   removeCard (position = 'top', numberOfCards = 1) {
+    // TODO: integrated number of cards in logic using for loop
     if (position === 'top') {
       const removedCard = this.cards.pop();
       return removedCard;
