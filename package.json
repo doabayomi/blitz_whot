@@ -1,5 +1,10 @@
 {
+  "scripts": {
+    "test": "jest ./tests",
+    "lint": "npx semistandard --fix \"**/*.js\""
+  },
   "dependencies": {
+    "jest": "^29.7.0",
     "semistandard": "^17.0.0"
   },
   "devDependencies": {
