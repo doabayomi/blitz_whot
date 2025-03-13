@@ -39,33 +39,17 @@ class Collection {
   }
 }
 
-class Hand extends Collection {
-  constructor () {
-    super();
-  }
-}
+class Hand extends Collection {}
 
-class PlayStack extends Collection {
-  constructor () {
-    super();
-  }
-}
+class PlayStack extends Collection {}
 
 class Deck extends Collection {
-  constructor () {
-    super();
-  }
-
   shuffle () {
     this.cards.sort(() => Math.random() - 0.5);
   }
 }
 
 class Table extends Collection {
-  constructor () {
-    super();
-  }
-
   // TODO: a penalty function after first tests.
 }
 
