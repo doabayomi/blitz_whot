@@ -30,6 +30,12 @@ const CARD_ACTIONS = {
 };
 
 /**
+ * @todo Possible constant for confirmin the nature of card
+ * actions whether they can be stacked upon or not. Maybe part of
+ * CARD_ACTIONS.
+ */
+
+/**
  * Whot card model
  * @class
  */

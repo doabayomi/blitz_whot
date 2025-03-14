@@ -57,6 +57,27 @@ class PlayStack extends Collection {
     }
     throw new Error('Card doesn\'t exist in PlayStack');
   }
+
+  isValidPlay (topCardOnTable) {
+    let previousCard = topCardOnTable;
+    for (let index = 0; index < this.cards.length; index++) {
+      const nextCard = this.cards[index];
+
+      if (
+        nextCard.number !== previousCard.number ||
+        nextCard.shape !== previousCard.shape
+      ) {
+        return false;
+      }
+
+      previousCard = nextCard;
+    }
+    return true;
+    /**
+     * @todo Implement validation logic with action cards evaluation
+     * to confirm if a play is valid.
+     */
+  }
 }
 
 class Deck extends Collection {

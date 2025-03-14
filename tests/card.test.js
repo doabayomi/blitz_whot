@@ -28,4 +28,4 @@ test('Card creation case autoAssignAction is true but action is given',
     testCard.action();
     expect(count).toBe(1);
   }
-)
+);
