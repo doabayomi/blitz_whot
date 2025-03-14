@@ -16,9 +16,18 @@ const ALLOWABLE_CARDS = {
   whot: [20, 20, 20, 20, 20]
 };
 
-function name (params) {
-
-}
+/**
+ * A map of card actions to action functions.
+ * @type {Object.<number, function(Game): void>}
+ */
+const CARD_ACTIONS = {
+  1: holdOn,
+  2: pickTwo,
+  5: pickThree,
+  8: suspendNextPlayer,
+  14: generalMarket,
+  20: demandCard
+};
 
 /**
  * Whot card model
@@ -43,6 +52,55 @@ class Card {
     }
     this.number = number;
   }
+}
+
+/**
+ * Forces players wait for current player to continue play
+ * @param {Game} game - The game instance being acted on
+ */
+function holdOn (game) {
+  /** @todo: Add game logic */
+}
+
+/**
+ * Forces next player pick two cards
+ * @param {Game} game - The game instance being acted on
+ */
+function pickTwo (game) {
+  /** @todo: Add game logic */
+}
+
+/**
+ * Forces next player pick three cards
+ * @param {Game} game - The game instance being acted on
+ */
+function pickThree (game) {
+  /** @todo: Add game logic */
+}
+
+/**
+ * Forces next player to forcefully skip turn
+ * @param {Game} game - The game instance being acted on
+ */
+function suspendNextPlayer (game) {
+  /** @todo: Add game logic */
+}
+
+/**
+ * Forces all players except current player pick one card
+ * @param {Game} game - The game instance being acted on
+ */
+function generalMarket (game) {
+  /** @todo: Add game logic */
+}
+
+/**
+ * Forces next player to play a card of a shape decided by
+ * current player
+ * @param {Game} game - The game instance being acted on
+ */
+function demandCard (game) {
+  /** @todo: Add game logic */
 }
 
 module.exports = { Card };
