@@ -39,8 +39,15 @@ class Card {
    * @constructor
    * @param {string} shape - The cards shape/suite
    * @param {number} number - The cards corresponding number
+   * @param {function(Game): void} [action=null] - Action function
+   * @param {boolean} [autoAssignAction=false] - Whether to assign action to cards by default
    */
-  constructor (shape, number) {
+  constructor (
+    shape,
+    number,
+    action = null,
+    autoAssignAction = false
+  ) {
     shape = shape.toLowerCase();
     if (!(Object.keys(ALLOWABLE_CARDS).includes(shape))) {
       throw new Error(`Invalid shape '${shape}'`);
@@ -51,6 +58,20 @@ class Card {
       throw new Error(`Invalid number '${number}'' for shape '${shape}'`);
     }
     this.number = number;
+
+    if (action !== null) {
+      this.action = action;
+      return;
+    }
+
+    if (
+      autoAssignAction === true &&
+      Object.keys(CARD_ACTIONS).includes(number)
+    ) {
+      this.action = CARD_ACTIONS[number];
+      return;
+    }
+    this.action = null;
   }
 }
 
