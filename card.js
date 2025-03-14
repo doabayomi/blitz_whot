@@ -124,4 +124,4 @@ function demandCard (game) {
   /** @todo: Add game logic */
 }
 
-module.exports = { Card };
+module.exports = { Card, ALLOWABLE_CARDS };

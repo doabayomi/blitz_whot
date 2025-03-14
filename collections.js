@@ -1,4 +1,4 @@
-const { Card } = require('./card');
+const { Card, ALLOWABLE_CARDS } = require('./card');
 
 class Collection {
   /** @type {Array.<Card>} */
@@ -10,34 +10,114 @@ class Collection {
 
   /**
    * Adds a card to the top of the collection
-   * @param {Card | Card[]} card - Card to add to the top of the deck.
+   * @param {Card} card - Card to add to the top of the deck.
    */
   addCard (card) {
-    this.cards.unshift(card);
+    this.cards.push(card);
+    /**
+     * @todo add behaviour for arrays of cards and not just
+     * individual cards
+    */
   }
 
-  removeCard (card) {
+  /**
+   * Base/Abstract class to remove a card.
+   * @param {Card|number} cardOrIndex - Card object or index of the card
+   */
+  removeCard (cardOrIndex) {
     throw new Error('removeCard must have an implementation');
   }
 }
 
-class Hand extends Collection {}
+class Hand extends Collection {
+  /**
+   * Removes a card
+   * @param {Card} card - Card object to remove from hand
+   * @returns Card if it exists in Hand. Throws error otherwise
+   */
+  removeCard (card) {
+    const cardIndex = this.cards.indexOf(card);
+    if (cardIndex !== -1) {
+      return this.cards.splice(cardIndex);
+    }
+    throw new Error('Card doesn\'t exist in Hand');
+  }
+}
 
-class PlayStack extends Collection {}
+class PlayStack extends Collection {
+  /**
+   * Removes a card
+   * @param {Card} card - Card object to remove from playstack
+   * @returns Card if it exists in PlayStack. Throws error otherwise.
+   */
+  removeCard (card) {
+    const cardIndex = this.cards.indexOf(card);
+    if (cardIndex !== -1) {
+      return this.cards.splice(cardIndex);
+    }
+    throw new Error('Card doesn\'t exist in PlayStack');
+  }
+}
 
 class Deck extends Collection {
-  constructor (deckMultiplier = 1, allowActionCards = false) {
-
-  }
   /**
-   * Shuffles the cards in the deck
+   * Creates a deck of cards.
+   * @param {number} deckMultiplier - Number of decks to multiply by
+   * @param {boolean} allowActionCards - Whether to auto assign actions to cards
    */
-  shuffle () {
-    this.cards.sort(() => Math.random() - 0.5);
+  constructor (deckMultiplier = 1, allowActionCards = false) {
+    super();
+    for (let i = 0; i < deckMultiplier.length; i++) {
+      this.initializeDeck(allowActionCards);
+    }
+
+    this.shuffle();
+  }
+
+  /**
+   * Creates a single standard deck of cards.
+   * @param {boolean} allowActionCards - Whether to auto assign actions.
+   */
+  initializeDeck (allowActionCards = false) {
+    for (const shape in ALLOWABLE_CARDS) {
+      if (Object.prototype.hasOwnProperty.call(ALLOWABLE_CARDS, shape)) {
+        const validNumbers = ALLOWABLE_CARDS[shape];
+
+        validNumbers.forEach(number => {
+          this.cards.addCard(
+            new Card(shape, number, null, allowActionCards)
+          );
+        });
+      }
+    }
+  }
+
+  /**
+   * Shuffles the deck
+   * @param {number} noOfTimes - Number of times to shuffle card
+   */
+  shuffle (noOfTimes = 1) {
+    for (let trials = 0; trials < noOfTimes.length; trials++) {
+      this.cards.sort(() => Math.random() - 0.5);
+    }
+  }
+
+  /**
+   * Removes the oldest card (bottom card) from the deck.
+   * @returns Card at bottom of the ceck
+   */
+  removeCard () {
+    return this.cards.shift();
   }
 }
 
 class Table extends Collection {
+  removeCard () {
+    /**
+     * @todo Add card removals based on penalties and/or finished
+     * decks
+     */
+  }
   /**
    * @todo Possible penalty implementation to game logic
    */
