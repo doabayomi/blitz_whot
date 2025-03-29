@@ -9,6 +9,8 @@ class Game {
   players;
   /** @type {Table} */
   table;
+  /** @type {Player} */
+  currentPlayer; nextPlayer;
   /**
    *
    * @param {number} numberOfPlayers - number of players
@@ -16,10 +18,14 @@ class Game {
    * @param {number} startingPlayerHandCount - number of cards each player start with
    */
   constructor (numberOfPlayers, deckMultiplier, startingPlayerHandCount) {
+    // create attributes;
     this.players = [];
+    this.deck = new Deck(deckMultiplier, ACTION_CARDS_ENABLED);
+    this.table = new Table();
+
+    // initialize players
     this.initializePlayers(numberOfPlayers);
-    // initialize cards
-    this.deck = new Deck(deckMultiplier, ALLOW_ACTION_CARDS);
+    // shuffle cards
     this.deck.shuffle(2);
 
     // distribute cards
@@ -37,13 +43,20 @@ class Game {
       }
     }
 
-    // create table
-    this.table = new Table()
-
     // place starting card on table
     let startingCard = this.deck.removeCard();
-    if s
+    while (
+      !(STARTING_CARD_ACTION_ALLOWED) 
+      && startingCard.action != null
+    ) {
+      this.deck.addCard(startingCard);
+      this.deck.shuffle();
+      startingCard = this.deck.removeCard();
+    }
     this.table.addCard(startingCard);
+
+    // Decide on who starts first
+    this.currentPlayer = this.players[0];
   }
 
   /**
@@ -55,5 +68,10 @@ class Game {
       const player = new Player('Player' + String(index + 1), this);
       this.players.push(player);
     }
+  }
+
+  start () {
+    // wait for a player to play
+    // confirm if play is valid based on lknoacking 
   }
 }
