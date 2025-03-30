@@ -21,10 +21,12 @@ in a single move!
 
 These two concepts makes the game more unpredictable as one play can turn the tables instantly and also creates very short, quick and thrilling games. This also makes having more cards not to be considered a handicap.
 
-There are certain nuances that are either ignored or agreed on with those rules:
-* Having to have a last card before checking up
-* The ability to stack certain action cards to amplify their effects (e.g. pick twos and pick threes)
-* What happens when the deck is used up.
+There are certain conditions that you can edit by changing their values in `constants.js`
+* Whether to allow action cards in the first place
+* Starting the game with a action or non-action card as starting card.
+* Whether an opposing player has to knock to force a play to be validated (evaluated) or the game auto-validates each play.
+* Having to have a last card before checking up.
+* Game ending conditions (what happens when the deck is used up or when somebody checks up).
 
 ## Features
 Right now, I'm focusing on building a game logic engine that can run a simple computer vs. computer match. It's all about simulating player moves using straightforward rules, and I plan to set up a basic UI to show the game state and help with testing.
