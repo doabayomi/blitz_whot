@@ -1,6 +1,10 @@
 const { Deck, Table } = require('./collections');
 const { Player } = require('./player');
-const { ACTION_CARDS_ENABLED, STARTING_CARD_ACTION_ALLOWED } = require('./constants');
+const {
+  ACTION_CARDS_ENABLED,
+  STARTING_CARD_ACTION_ALLOWED,
+  PLAYER_KNOCKING_ENABLED
+} = require('./constants');
 
 class Game {
   /** @type {Deck} */
@@ -33,12 +37,12 @@ class Game {
       let playerIndex = 0;
       playerIndex < this.players.length; playerIndex++
     ) {
-      const playertoReceiveCards = this.players[index];
+      const playertoReceiveCards = this.players[playerIndex];
 
       for (let cardsGiven = 0;
         cardsGiven < startingPlayerHandCount; cardsGiven++
       ) {
-        let removedCard = this.deck.removeCard();
+        const removedCard = this.deck.removeCard();
         playertoReceiveCards.hand.addCard(removedCard);
       }
     }
@@ -46,8 +50,8 @@ class Game {
     // place starting card on table
     let startingCard = this.deck.removeCard();
     while (
-      !(STARTING_CARD_ACTION_ALLOWED) 
-      && startingCard.action != null
+      !(STARTING_CARD_ACTION_ALLOWED) &&
+      startingCard.action != null
     ) {
       this.deck.addCard(startingCard);
       this.deck.shuffle();
@@ -57,6 +61,11 @@ class Game {
 
     // Decide on who starts first
     this.currentPlayer = this.players[0];
+
+    // take effect on game if starting card is an action card
+    if (startingCard.action != null) {
+      startingCard.action(this);
+    }
   }
 
   /**
@@ -70,8 +79,28 @@ class Game {
     }
   }
 
-  start () {
+  startGame () {
     // wait for a player to play
-    // confirm if play is valid based on lknoacking 
+    while (!this.currentPlayer.hasPlayed) {
+      this.waitForPlayer(this.currentPlayer);
+    }
+
+    // confirm if play is valid based on knocking
+    const playIsValid = this.currentPlayer.playStack.isValidPlay(
+      this.table[this.table.length - 1]
+    );
+    if (playIsValid) {
+      this.currentPlayer.playStack.takeAction(this);
+      this.table.addCard(this.currentPlayer.playStack);
+      this.nextTurn();
+      /** @todo add knocking condition */
+    }
+  }
+
+  waitForPlayer (player) {
+    /** @todo Logic for player waiting to play/AI playing. */
   }
 }
+
+
+module.exports = { Game };

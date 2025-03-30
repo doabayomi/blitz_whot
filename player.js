@@ -1,4 +1,4 @@
-const { Hand, PlayStack } = require('./collection');
+const { Hand, PlayStack } = require('./collections');
 const { Game } = require('./game');
 
 class Player {
@@ -6,7 +6,8 @@ class Player {
   hand;
   /** @type {PlayStack} */
   playStack;
-
+  /** @type {boolean} */
+  hasPlayed;
   /**
    * Creates a player
    * @constructor
@@ -16,9 +17,13 @@ class Player {
   constructor (name, game) {
     this.name = name;
     this.game = game;
+    this.hasPlayed = false;
   }
 
-  // TODO: add pick function
+  /**
+   * @todo: a player pick function and a effect object to know
+   * what has been done to a player.s
+   */
 }
 
 module.exports = { Player };

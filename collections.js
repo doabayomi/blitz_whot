@@ -78,6 +78,12 @@ class PlayStack extends Collection {
      * to confirm if a play is valid.
      */
   }
+
+  takeAction (game) {
+    /**
+     * @todo Implmenent logic for taking equivalent action on game
+     */
+  }
 }
 
 class Deck extends Collection {
