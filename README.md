@@ -1,8 +1,10 @@
-![Alt text](./logo.png "Blitz Whot")
+<div style="text-align: center;">
 
+  ![alt text](./logo.png "Our logo")
+  :construction: Work in Progress :construction:
 
-:construction: Work in Progress
-
+  # Blitz Whot Game
+</div>
 
 ## Introduction
 The goal of this project currently is to create a game logic model for a variation of the Whot Card Game
