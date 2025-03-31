@@ -3,7 +3,7 @@
   ![alt text](./logo.png "Our logo")
   :construction: Work in Progress :construction:
 
-  # Blitz Whot Game
+  # Blitz Whot: The Card Game
 </div>
 
 ## Introduction
