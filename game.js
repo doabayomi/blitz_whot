@@ -15,6 +15,8 @@ class Game {
   table;
   /** @type {Player} */
   currentPlayer; nextPlayer;
+  /** @type {boolean} */
+  hasEnded = false;
   /**
    *
    * @param {number} numberOfPlayers - number of players
@@ -79,21 +81,27 @@ class Game {
     }
   }
 
-  startGame () {
-    // wait for a player to play
-    while (!this.currentPlayer.hasPlayed) {
-      this.waitForPlayer(this.currentPlayer);
-    }
+  runGame () {
+    while (!(this.hasEnded)) {
+      // wait for a player to play
+      while (!this.currentPlayer.hasPlayed) {
+        this.waitForPlayer(this.currentPlayer);
+      }
+  
+      // confirm if play is valid based on knocking
+      const playIsValid = this.currentPlayer.playStack.isValidPlay(
+        this.table[this.table.length - 1]
+      );
+      if (playIsValid) {
+        this.currentPlayer.playStack.takeAction(this);
+        this.table.addCard(this.currentPlayer.playStack);
+        this.nextTurn();
+        /** @todo add knocking condition */
 
-    // confirm if play is valid based on knocking
-    const playIsValid = this.currentPlayer.playStack.isValidPlay(
-      this.table[this.table.length - 1]
-    );
-    if (playIsValid) {
-      this.currentPlayer.playStack.takeAction(this);
-      this.table.addCard(this.currentPlayer.playStack);
-      this.nextTurn();
-      /** @todo add knocking condition */
+        if (this.deck.cards.length == 0) {
+          this.hasEnded = true;
+        }
+      }
     }
   }
 
