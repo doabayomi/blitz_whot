@@ -100,13 +100,19 @@ class Game {
 
         if (this.deck.cards.length == 0) {
           this.hasEnded = true;
+          break;
         }
       }
     }
+    this.endGame()
   }
 
   waitForPlayer (player) {
     /** @todo Logic for player waiting to play/AI playing. */
+  }
+
+  endGame() {
+    /** @todo Added endgame protocol */
   }
 }
 
