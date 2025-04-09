@@ -20,10 +20,16 @@ class Player {
     this.hasPlayed = false;
   }
 
+  makePlay() {
+    /**
+     * @todo Logicfor making play as AI
+     */
+  }
   /**
    * @todo: a player pick function and a effect object to know
-   * what has been done to a player.s
+   * what has been done to a player.
    */
+
 }
 
 module.exports = { Player };

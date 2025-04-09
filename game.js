@@ -109,6 +109,7 @@ class Game {
 
   waitForPlayer (player) {
     /** @todo Logic for player waiting to play/AI playing. */
+    player.makePlay();
   }
 
   endGame() {
