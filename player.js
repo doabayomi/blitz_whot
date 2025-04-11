@@ -18,6 +18,7 @@ class Player {
     this.name = name;
     this.game = game;
     this.hasPlayed = false;
+    this.hand = new Hand();
   }
 
   makePlay() {

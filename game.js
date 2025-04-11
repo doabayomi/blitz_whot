@@ -32,7 +32,7 @@ class Game {
     // initialize players
     this.initializePlayers(numberOfPlayers);
     // shuffle cards
-    this.deck.shuffle(2);
+    this.deck.shuffle();
 
     // distribute cards
     for (
@@ -49,6 +49,7 @@ class Game {
       }
     }
 
+    console.log(`Deck length: ${this.deck.cards.length}`);
     // place starting card on table
     let startingCard = this.deck.removeCard();
     while (

@@ -94,7 +94,7 @@ class Deck extends Collection {
    */
   constructor (deckMultiplier = 1, allowActionCards = false) {
     super();
-    for (let i = 0; i < deckMultiplier.length; i++) {
+    for (let i = 0; i < deckMultiplier; i++) {
       this.initializeDeck(allowActionCards);
     }
 
@@ -111,7 +111,7 @@ class Deck extends Collection {
         const validNumbers = ALLOWABLE_CARDS[shape];
 
         validNumbers.forEach(number => {
-          this.cards.addCard(
+          this.addCard(
             new Card(shape, number, null, allowActionCards)
           );
         });
@@ -124,8 +124,11 @@ class Deck extends Collection {
    * @param {number} noOfTimes - Number of times to shuffle card
    */
   shuffle (noOfTimes = 1) {
-    for (let trials = 0; trials < noOfTimes.length; trials++) {
-      this.cards.sort(() => Math.random() - 0.5);
+    for (let trials = 0; trials < noOfTimes; trials++) {
+      for (let i = this.cards.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [this.cards[i], this.cards[j]] = [this.cards[j], this.cards[i]];
+      }
     }
   }
 
